@@ -1,0 +1,70 @@
+#+options: ':nil *:t -:t ::t <:t H:3 \n:nil ^:t arch:headline author:t
+#+options: broken-links:nil c:nil creator:nil d:(not "LOGBOOK") date:t e:t
+#+options: email:nil f:t inline:t num:nil p:nil pri:nil prop:nil stat:t tags:t
+#+options: tasks:t tex:t timestamp:t title:t toc:1 todo:t |:t
+#+title: Machine learning Explainability/Interpretability Learning Path
+#+date: <2021-06-29 Tue>
+#+author: Yuxin(Cindy) Liu
+#+email: yliu1754@bloomberg.net
+#+language: en
+#+creator: Emacs 26.3 (Org mode 9.2.6)
+
+Machine learning explainability / interpretability is a very active area of investigation among AI researchers in both academia and industry. The two terms ‘explainability’ and ‘interpretability’ are used interchangeably. Some people say that ‘explainable’ refers to post hoc analysis used to understand a previously trained model or its predictions, while ‘interpretable’ refers to designing directly interpretable machine learning algorithms. To avoid confusion, we make no difference between these two terms. The Wikipedia page of Explainable AI (XAI) (https://en.wikipedia.org/wiki/Explainable_artificial_intelligence) is a good place to start from.
+
+- [[https://www.twosigma.com/articles/interpretability-methods-in-machine-learning-a-brief-survey/][This article]] is a brief introduction to basic techniques in machine learning interpretability with concise, understandable examples.
+
+
+- [[https://christophm.github.io/interpretable-ml-book/][This]] is an introductory book that gives a comprehensive introduction of machine learning interpretability. It focuses on machine learning models for tabular data and less on computer vision and natural language processing tasks. Readers are expected to have learned basics of machine learning. In general this book is easy to read and is focused more on intuitive understanding instead of mathematical derivations. If you don’t want to read the whole book, the 5th, 6th and 7th chapters (Model-Agnostic Methods, Example-Based Explanations and Neural Network Interpretation) are recommended.
+
+
+- [[https://github.com/davidrosenberg/ttml2021/tree/main/interpretable-ml][These lecture notes]] gives a theoretical background and a good review of important papers in this field. It may not be necessary to dive into mathematical details of some explanation methods in order to use them in practice, but it enables you to understand better how the results are derived and the difference between different methods.
+
+
+- [[https://storage.googleapis.com/cloud-ai-whitepapers/AI%20Explainability%20Whitepaper.pdf][This whitepaper]] by Google Cloud's AI Explanations summarizes explainability techniques available in Google Cloud AI Explanations. It covers common methods like Shapley values, attribution methods etc. Also included are some visualization examples with the What-If tool. 
+
+
+- [[https://arxiv.org/pdf/1711.06104.pdf][This paper]] introduces attribution methods on explaining deep neural networks in computer vision, which is a good complementary material to the book Interpretable Machine Learning mentioned above.
+
+
+- [[https://www.bankofengland.co.uk/-/media/boe/files/working-paper/2019/machine-learning-explainability-in-finance-an-application-to-default-risk-analysis.pdf?la=en&hash=692E8FD8550DFBF5394A35394C00B1152DAFCC9E][This paper]] applies machine learning explainability techniques to analyze mortgage default risk. It demonstrates how explainable AI tools can allow for better quality assurance of black box ML models, as well as model performance testing, understanding the properties of the data set and domain knowledge.
+
+
+- [[https://www.researchgate.net/publication/346607482_Interpretable_Machine_Learning_for_Diversified_Portfolio_Construction][This paper]] uses "explainable AI" to compare the robustness of different portfolio diversification strategies and implicit rules for decision making. It’s another example of how machine learning explainability can be used in a financial setting.
+
+
+- [[https://arxiv.org/pdf/2010.10596.pdf][This paper]] reviews and categorizes research on counterfactual explanations, which plays an important role in real-life scenarios like mortgage default analysis. It defines desirable properties of counterfactual explanations, evaluates existing generation algorithms for counterfactuals and provides some examples. It’s a good starting point for readers interested in linking machine learning interpretability and causality.
+
+
+
+* Python Packages for Machine Learning Explainability
+
+- [[https://shap.readthedocs.io/en/latest/index.html][SHAP]]: This package connects optimal credit allocation with local explanations using the classic Shapley values from game theory and their related extensions,  and is aimed at explaining individual predictions. Its visualizations are great and the documentation also contains a lot of wonderful tutorials on this topic. To learn more about Shapley values, you can refer to the lecture notes (https://github.com/davidrosenberg/ttml2021/blob/main/interpretable-ml/3.shapley-values.pdf). 
+
+
+- [[https://captum.ai/api/][Captum]]: This package is an open source library for model interpretability built on PyTorch. It’s focused on attribution methods for neural networks, and the documentation page gives a general introduction to the methods implemented in this package. The drawback is that it’s only compatible with models built in PyTorch.
+
+
+- [[https://lime-ml.readthedocs.io/en/latest/index.html][lime]]: This package implements LIME (local interpretable model-agnostic explanations), which only requires the predictions given by the original model. To learn more about lime, this article (https://towardsdatascience.com/decrypting-your-machine-learning-model-using-lime-5adc035109b5) is a good reference. It can be used together with SHAP to understand feature importance from different perspectives.
+
+
+- [[https://eli5.readthedocs.io/en/latest/overview.html][eli5]]: ELI5 is an acronym for ‘Explain like I am a 5-year old’. This package helps to debug machine learning classifiers and explain their predictions both locally and globally. It provides support for popular libraries like scikit-learn, XGBoost, Keras, etc. A highlight is the formatter module where HTML, JSON or even Pandas dataframe versions of explanations can be generated, which makes it easy to integrate the explanation in our machine learning pipeline.
+
+
+- [[https://www.scikit-yb.org/en/latest/quickstart.html][Yellowbrick]]: This package is based on scikit-learn and matplotlib. It can be seen as an extension to scikit-learn and is focused on visualizations on model selection, feature importance and model performance analysis.
+
+
+- [[https://docs.seldon.io/projects/alibi/en/latest/][alibi]]: It’s an open source library for black-box, white-box, local and global explanation methods for classification and regression models. It’s is specifically designed for black-box models, which is particularly useful when we won’t want to tamper with the workflow of the machine learning models.
+
+
+- [[https://github.com/albermax/innvestigate][iNNvestigate]]: This package provides a common interface and out-of-the-box implementation for many analysis methods for deep neural networks, including Gradient Saliency Map, SmoothGrad, IntegratedGradients, Deconvnet, GuidedBackprop, PatternNet and PatternAttribution, DeepTaylor, and LRP. It allows for easy qualitative comparisons of methods. The documentation page also contains tutorials that helps us understand the methods implemented as well as how to use the package.
+
+
+- [[https://github.com/marcoancona/DeepExplain][DeepExplain]]: This package provides a unified framework for state-of-the-art gradient and perturbation-based attribution methods. It supports Tensorflow as well as Keras. It’s focused on attribution, which is to determine a real value for each input feature, with respect to a target neuron of interest. It’s still in active development so we’d better use it in supplement to other packages.
+
+
+* Other Tools
+- [[https://cloud.google.com/ai-platform/prediction/docs/ai-explanations/overview)][Google Cloud AI Explanations]]: This whitepaper (https://storage.googleapis.com/cloud-ai-whitepapers/AI Explainability Whitepaper.pdf) mentioned above summarizes the functionality of this platform. 
+
+
+- [https://pair-code.github.io/what-if-tool/][What-If Tool]: This tool enables users to visually probe the behavior of trained machine learning models, with minimal coding. It is available as an extension in Jupyter, Colaboratory, and Cloud AI Platform notebooks. A lot of analysis can be done by just clicking the mouse, like editing a data point, finding a counterfactual, visualizing partial dependence plots etc. There are many interesting tutorials and demos on the webpage for users to run and play with.
+
